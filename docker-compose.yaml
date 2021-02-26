@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  robspay:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - robspay-deps:/app/deps
+      - robspay-build:/app/_build
+    ports:
+      - 3030:4000
+    command: "mix phx.server"
+    depends_on:
+      - postgres13
+
+  postgres13:
+    image: postgres:13.2-alpine
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5430:5430
+
+volumes:
+  robspay-deps:
+  robspay-build:
+  postgres:
+    external: true

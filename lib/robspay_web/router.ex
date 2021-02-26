@@ -7,6 +7,8 @@ defmodule RobspayWeb.Router do
 
   scope "/api", RobspayWeb do
     pipe_through :api
+
+    get "/:filename", WelcomeController, :index
   end
 
   # Enables LiveDashboard only for development
